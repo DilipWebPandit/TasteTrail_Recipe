@@ -16,6 +16,7 @@ for (let i = 0; i < anchor.length; i++) {
       let response = await fetch(url);
       let data = await response.json();
       let newData = data.meals;
+      console.log(newData);
 
       const item = document.querySelector(".item");
 
@@ -25,6 +26,7 @@ for (let i = 0; i < anchor.length; i++) {
         let image = document.createElement("img");
         image.src = e.strMealThumb;
         let name = document.createElement("h2");
+        name.style.color = "white";
         let btn = document.createElement("button");
         btn.classList.add("btn");
         btn.innerText = "View Recipe";
@@ -51,7 +53,9 @@ for (let i = 0; i < anchor.length; i++) {
 
           newItem.style.display = "flex";
           newItem.style.flexDirection = "column";
-          newItem.style.justfyContent = "center";
+          // newItem.style.justfyContent = "start";
+          // newItem.style.alignItems = "start";
+          newItem.style.color = "white";
 
           let html = "";
           for (let i = 1; i <= ingredientCount; i++) {
@@ -62,13 +66,17 @@ for (let i = 0; i < anchor.length; i++) {
           }
 
           newItem.innerHTML = `
-            <div class="item_menu">
-                <h1 style="text-align: center;">${e.strMeal}</h1>
-                <img src="${e.strMealThumb}" alt="Random image" style="width: 90%;
-                height: 60vh;">
-                <h3><em>Item's List:-</em>
-                    <p>${html}</p>
-                </h3>
+            <div class="item_menu detail-view">
+              <h1 class="meal-title">${e.strMeal}</h1>
+              <img src="${e.strMealThumb}" alt="${e.strMeal}" class="meal-image">
+              <div class="meal-ingredients">
+                <h3><em>Item’s List:</em></h3>
+                <p>${html}</p>
+              </div>
+              <div class="meal-instruction">
+                <h3><em>Instructions:</em></h3>
+                <p>${e.strInstructions}</p>
+              </div>
             </div>
           `;
         });
